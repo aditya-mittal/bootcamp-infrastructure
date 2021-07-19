@@ -1,0 +1,132 @@
+pipeline {
+    agent any
+
+    parameters {
+        choice(name: 'CREATE_OR_DESTROY', choices: ['create', 'destroy'], description: 'Select whether you want to create or destroy the infrastructure')
+    }
+    stages {
+        stage('use-terraform-version') {
+            steps {
+                dir('ecs-cluster') {
+                    script {
+                        int tfenvUseExitCode = sh(
+                                returnStatus: true,
+                                label: 'tfenv-use',
+                                script: '''
+                                    REQUIRED_TERRAFORM_VERSION=$(grep required_version *.tf | cut -d '\"' -f 2)
+                                    echo "Required terraform version is: ${REQUIRED_TERRAFORM_VERSION}";
+                                    tfenv install ${REQUIRED_TERRAFORM_VERSION};
+                                    tfenv use ${REQUIRED_TERRAFORM_VERSION};
+                                '''
+                        )
+                        if (tfenvUseExitCode) {
+                            error("Attempt to read & provision specific terraform version failed")
+                        }
+                    }
+                }
+            }
+        }
+        stage('terraform-plan-for-create') {
+            when {
+                expression { params.CREATE_OR_DESTROY == 'create' }
+            }
+            steps {
+                dir('ecs-cluster') {
+                    script {
+                        ansiColor('xterm') {
+                            env.tfPlanExitCode = sh(
+                                    returnStatus: true,
+                                    label: 'tf-plan',
+                                    script: '''
+                                export TF_IN_AUTOMATION=true
+                                export TF_INPUT=0
+                                terraform init
+                                terraform plan -detailed-exitcode -out tfplan 
+                            '''
+                            )
+                        }
+                        if (env.tfPlanExitCode == '0') {
+                            echo "No changes. Infrastructure is up-to-date"
+                        } else if (env.tfPlanExitCode == '1') {
+                            error("Terraform plan failed with an error")
+                        }
+                    }
+                    stash includes: "tfplan", name: "terraform-plan"
+                    stash includes: ".terraform/**", name: "terraform-modules"
+                }
+            }
+        }
+        stage('terraform-plan-for-destroy') {
+            when {
+                expression { params.CREATE_OR_DESTROY == 'destroy' }
+            }
+            steps {
+                dir('ecs-cluster') {
+                    script {
+                        ansiColor('xterm') {
+                            env.tfPlanExitCode = sh(
+                                    returnStatus: true,
+                                    label: 'tf-plan',
+                                    script: '''
+                                export TF_IN_AUTOMATION=true
+                                export TF_INPUT=0
+                                terraform init
+                                terraform plan -destroy -detailed-exitcode -out tfplan 
+                            '''
+                            )
+                        }
+                        if (env.tfPlanExitCode == '0') {
+                            echo "No changes. Infrastructure is up-to-date"
+                        } else if (env.tfPlanExitCode == '1') {
+                            error("Terraform plan failed with an error")
+                        }
+                    }
+                    stash includes: "tfplan", name: "terraform-plan"
+                    stash includes: ".terraform/**", name: "terraform-modules"
+                }
+            }
+        }
+        stage("review-and-approve") {
+            when {
+                allOf {
+                    expression { env.tfPlanExitCode == '2' }
+                    expression { env.BRANCH_NAME == 'master' }
+                }
+            }
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    input "Have you reviewed the terraform plan for changes? Do you want to proceed with it?"
+                }
+            }
+        }
+        stage('apply') {
+            when {
+                allOf {
+                    expression { env.tfPlanExitCode == '2' }
+                    expression { env.BRANCH_NAME == 'master' }
+                }
+            }
+            steps {
+                dir('ecs-cluster') {
+                    unstash 'terraform-plan'
+                    unstash 'terraform-modules'
+                    script {
+                        ansiColor('xterm') {
+                            sh(
+                                label: 'tf-apply',
+                                script: '''
+                                    export TF_IN_AUTOMATION=true
+                                    export TF_INPUT=0
+                                    export TF_LOG=DEBUG 
+                                    export TF_LOG_PATH=terraform_apply_logs
+                                    terraform apply tfplan 
+                                '''
+                            )
+                        }
+                    }
+                    archiveArtifacts 'terraform_apply_logs'
+                }
+            }
+        }
+    }
+}
