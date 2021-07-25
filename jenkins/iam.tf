@@ -53,7 +53,7 @@ data "aws_iam_policy_document" "dynamo_readwrite_policy_document" {
     actions = [
       "dynamodb:*Item"
     ]
-    resources = ["arn:aws:dynamodb:us-east-1:038062473746:table/ee-pune-library-terraform-lock-table"]
+    resources = ["arn:aws:dynamodb:us-east-1:038062473746:table/ee-pune-bootcamp-2021-terraform-lock-table"]
   }
 }
 
@@ -109,9 +109,9 @@ resource "aws_iam_role_policy_attachment" "ec2_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
 }
 
-resource "aws_iam_role_policy_attachment" "ec2_container_service_policy" {
+resource "aws_iam_role_policy_attachment" "ecs_policy" {
   role       = aws_iam_role.jenkins.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerServiceFullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
 
 }
 

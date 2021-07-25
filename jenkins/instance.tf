@@ -19,7 +19,7 @@ data "template_file" "jenkins_userdata" {
 
   vars = {
     aws_region        = local.aws_region
-    image_tag         = local.jenkins_image_tag
+    image_tag         = var.jenkins_image_tag
     admin_password    = var.admin_password
     readonly_password = var.readonly_password
     github_user_name  = var.github_user_name

@@ -18,7 +18,6 @@ provider "aws" {
 
 locals {
   aws_region        = "us-east-1"
-  jenkins_image_tag = "70d7b216ce99256dfbb73586f9847075bbef0c19"
   name_prefix       = "bootcamp-2021-ee-pune"
   vpc_id            = data.terraform_remote_state.vpc.outputs.vpc_id
   alb_arn           = data.terraform_remote_state.alb.outputs.alb_arn
