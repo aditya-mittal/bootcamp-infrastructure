@@ -29,7 +29,7 @@ data "template_file" "jenkins_userdata" {
 
 resource "aws_instance" "jenkins" {
   ami                    = data.aws_ami.ubuntu.id
-  instance_type          = "t2.micro"
+  instance_type          = "t2.medium"
   subnet_id              = tolist(data.aws_subnet_ids.private_subnet_ids.ids)[0]
   vpc_security_group_ids = [aws_security_group.jenkins_sg.id]
   iam_instance_profile   = aws_iam_instance_profile.jenkins.name
