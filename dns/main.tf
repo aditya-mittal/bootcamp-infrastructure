@@ -19,6 +19,7 @@ provider "aws" {
 locals {
   aws_region        = "us-east-1"
   name_prefix       = "bootcamp-2021-ee-pune"
+  domain_name       = "bootcamp2021.online"
 
   common_tags = {
     CreatedBy             = "terraform"

@@ -1,5 +1,5 @@
 resource "aws_route53_zone" "main" {
-  name = "bootcamp2021.online"
+  name = local.domain_name
 
   tags = merge(
   map(
