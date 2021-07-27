@@ -17,9 +17,11 @@ provider "aws" {
 }
 
 locals {
-  aws_region  = "us-east-1"
-  name_prefix = "bootcamp-2021-ee-pune"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
+  aws_region   = "us-east-1"
+  name_prefix  = "bootcamp-2021-ee-pune"
+  vpc_id       = data.terraform_remote_state.vpc.outputs.vpc_id
+  ssl_cert_arn = data.terraform_remote_state.dns.outputs.ssl_cert_arn
+
   common_tags = {
     CreatedBy             = "terraform"
     MaintainerSlackHandle = "${local.name_prefix}"
@@ -32,6 +34,16 @@ data "terraform_remote_state" "vpc" {
   config = {
     bucket = "ee-pune-bootcamp-2021-tf-state"
     key    = "vpc/us-east-1/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+data "terraform_remote_state" "dns" {
+  backend = "s3"
+
+  config = {
+    bucket = "ee-pune-bootcamp-2021-tf-state"
+    key    = "dns/us-east-1/terraform.tfstate"
     region = "us-east-1"
   }
 }
