@@ -5,10 +5,10 @@ resource "aws_acm_certificate" "ssl_cert" {
   subject_alternative_names = ["*.${local.domain_name}"]
 
   tags = merge(
-  map(
-  "Name", "${local.name_prefix}-cert"
-  ),
-  local.common_tags
+    map(
+      "Name", "${local.name_prefix}-cert"
+    ),
+    local.common_tags
   )
 
   lifecycle {
