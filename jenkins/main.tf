@@ -17,11 +17,11 @@ provider "aws" {
 }
 
 locals {
-  aws_region        = "us-east-1"
-  name_prefix       = "bootcamp-2021-ee-pune"
-  vpc_id            = data.terraform_remote_state.vpc.outputs.vpc_id
-  alb_arn           = data.terraform_remote_state.alb.outputs.alb_arn
-  alb_sg_id         = data.terraform_remote_state.alb.outputs.alb_sg_id
+  aws_region  = "us-east-1"
+  name_prefix = "bootcamp-2021-ee-pune"
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
+  alb_arn     = data.terraform_remote_state.alb.outputs.alb_arn
+  alb_sg_id   = data.terraform_remote_state.alb.outputs.alb_sg_id
 
   common_tags = {
     CreatedBy             = "terraform"
@@ -33,7 +33,7 @@ data "terraform_remote_state" "vpc" {
   backend = "s3"
 
   config = {
-    bucket  = "ee-pune-bootcamp-2021-tf-state"
+    bucket = "ee-pune-bootcamp-2021-tf-state"
     key    = "vpc/us-east-1/terraform.tfstate"
     region = "us-east-1"
   }
@@ -43,7 +43,7 @@ data "terraform_remote_state" "alb" {
   backend = "s3"
 
   config = {
-    bucket  = "ee-pune-bootcamp-2021-tf-state"
+    bucket = "ee-pune-bootcamp-2021-tf-state"
     key    = "alb/us-east-1/terraform.tfstate"
     region = "us-east-1"
   }
