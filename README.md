@@ -2,6 +2,7 @@
 
 Repository holding code to provision all infrastructure components needed, namely
 - VPC
+- DNS 
 - ALB
 - ECR
 - Jenkins
@@ -27,6 +28,7 @@ $ aws dynamodb create-table --table-name ee-pune-bootcamp-2021-terraform-lock-ta
 
 
 - [VPC](./vpc/README.md)
+- [DNS](./dns/README.md)
 - [ALB](./alb/README.md)
 - [ECR](./ecr/README.md)
 - [Jenkins](./jenkins/README.md)
