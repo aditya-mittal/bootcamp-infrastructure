@@ -4,6 +4,8 @@ Provisions an ALB for load balancing all services and tools.
 
 The entire provisioning of ALB is done using terraform.
 
+![ALB Diagram](./alb.png "ALB")
+
 ### Pre-requisites
 
 - [terraform 0.12.19](https://learn.hashicorp.com/terraform/getting-started/install.html)

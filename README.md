@@ -26,7 +26,6 @@ $ aws dynamodb create-table --table-name ee-pune-bootcamp-2021-terraform-lock-ta
 
 ### Provisioning infrastructure
 
-
 - [VPC](./vpc/README.md)
 - [DNS](./dns/README.md)
 - [ALB](./alb/README.md)

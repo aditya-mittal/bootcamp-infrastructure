@@ -2,6 +2,8 @@
 
 Provision an EC2 instance for hosting Jenkins.
 
+![Jenkins Diagram](./jenkins.png "Jenkins")
+
 ### Pre-requisites
 
 - [terraform 0.12.19](https://learn.hashicorp.com/terraform/getting-started/install.html)
