@@ -1,10 +1,6 @@
-data "aws_lb" "main_alb" {
-  arn = local.alb_arn
-}
-
-data "aws_lb_listener" "alb_port_443_listener" {
+data "aws_lb_listener" "alb_port_80_listener" {
   load_balancer_arn = local.alb_arn
-  port              = 443
+  port              = 80
 }
 
 resource "aws_lb_target_group" "jenkins_tg" {
@@ -48,7 +44,7 @@ resource "aws_lb_target_group_attachment" "jenkins_tg_attachment" {
 }
 
 resource "aws_lb_listener_rule" "forward_to_jenkins" {
-  listener_arn = data.aws_lb_listener.alb_port_443_listener.arn
+  listener_arn = data.aws_lb_listener.alb_port_80_listener.arn
 
   action {
     type             = "forward"
@@ -56,8 +52,10 @@ resource "aws_lb_listener_rule" "forward_to_jenkins" {
   }
 
   condition {
-    host_header {
-      values = ["jenkins.bootcamp2021.online"]
+    path_pattern {
+      values = [
+        "/*"
+      ]
     }
   }
 
