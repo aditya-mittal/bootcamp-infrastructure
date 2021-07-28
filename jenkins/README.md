@@ -2,7 +2,7 @@
 
 Provision an EC2 instance for hosting Jenkins.
 
-![Jenkins Diagram](./jenkins.png "Jenkins")
+![Jenkins Diagram](../docs/jenkins.png "Jenkins")
 
 ### Pre-requisites
 
