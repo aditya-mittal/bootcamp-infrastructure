@@ -7,6 +7,8 @@ Repository holding code to provision all infrastructure components needed, namel
 - ECR
 - Jenkins
 - Environment (ECS Cluster)
+
+![Infra Diagram](./jenkins.png "Infra Diagram")
  
 ### Pre-requisites
  
