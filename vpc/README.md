@@ -5,7 +5,7 @@ design
 
 The entire provisioning of VPC is done using terraform.
 
-![VPC Diagram](./vpc.png "VPC")
+![VPC Diagram](../docs/vpc.png "VPC")
 
 ### Pre-requisites
 
