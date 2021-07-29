@@ -13,15 +13,20 @@ Repository holding code to provision all infrastructure components needed, namel
 ### Pre-requisites
  
 Before provisioning any code with terraform,
+- Update all your files to prevent name-space conflict, 
+since all resources will be provisioned in a shared AWS account
+```bash
+$ ./updateUsername.sh
+```
 - Configure AWS credentials
 - Create a S3 bucket & enable bucket versioning
 ```bash
-$ aws s3 mb s3://ee-pune-bootcamp-2021-tf-state --region us-east-1
-$ aws s3api put-bucket-versioning --bucket ee-pune-bootcamp-2021-tf-state --versioning-configuration Status=Enabled --region us-east-1
+$ aws s3 mb s3://REPLACE-USERNAME-ee-pune-bootcamp-2021-tf-state --region us-east-1
+$ aws s3api put-bucket-versioning --bucket REPLACE-USERNAME-ee-pune-bootcamp-2021-tf-state --versioning-configuration Status=Enabled --region us-east-1
 ```
 - Create a table in DynamoDB using script
 ```bash
-$ aws dynamodb create-table --table-name ee-pune-bootcamp-2021-terraform-lock-table \
+$ aws dynamodb create-table --table-name REPLACE-USERNAME-ee-pune-bootcamp-2021-terraform-lock-table \
     --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH \
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --region us-east-1
 ```
