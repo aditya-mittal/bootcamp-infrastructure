@@ -90,7 +90,7 @@ pipeline {
             when {
                 allOf {
                     expression { env.tfPlanExitCode == '2' }
-                    expression { env.BRANCH_NAME == 'master' }
+                    expression { env.GIT_BRANCH == 'origin/master' }
                 }
             }
             steps {
@@ -103,7 +103,7 @@ pipeline {
             when {
                 allOf {
                     expression { env.tfPlanExitCode == '2' }
-                    expression { env.BRANCH_NAME == 'master' }
+                    expression { env.GIT_BRANCH == 'origin/master' }
                 }
             }
             steps {
