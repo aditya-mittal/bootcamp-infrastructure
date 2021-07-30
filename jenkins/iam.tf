@@ -30,8 +30,14 @@ data "aws_iam_policy_document" "s3_readwrite_policy_docuemnt" {
   statement {
     sid       = "AllObjectActions"
     effect    = "Allow"
-    actions   = ["s3:*Object"]
-    resources = ["arn:aws:s3:::ee-pune-bootcamp-2021-tf-state/*"]
+    actions   = [
+      "s3:ListBucket",
+      "s3:*Object"
+    ]
+    resources = [
+      "arn:aws:s3:::ee-pune-bootcamp-2021-tf-state",
+      "arn:aws:s3:::ee-pune-bootcamp-2021-tf-state/*"
+    ]
   }
 }
 
