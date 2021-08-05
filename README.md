@@ -21,12 +21,12 @@ $ ./updateUsername.sh
 - Configure AWS credentials
 - Create a S3 bucket & enable bucket versioning
 ```bash
-$ aws s3 mb s3://REPLACE-USERNAME-ee-pune-bootcamp-2021-tf-state --region us-east-1
-$ aws s3api put-bucket-versioning --bucket REPLACE-USERNAME-ee-pune-bootcamp-2021-tf-state --versioning-configuration Status=Enabled --region us-east-1
+$ aws s3 mb s3://REPLACE-USERNAME-bootcamp-2021-tf-state --region us-east-1
+$ aws s3api put-bucket-versioning --bucket REPLACE-USERNAME-bootcamp-2021-tf-state --versioning-configuration Status=Enabled --region us-east-1
 ```
 - Create a table in DynamoDB using script
 ```bash
-$ aws dynamodb create-table --table-name REPLACE-USERNAME-ee-pune-bootcamp-2021-terraform-lock-table \
+$ aws dynamodb create-table --table-name REPLACE-USERNAME-bootcamp-2021-tf-lock-table \
     --attribute-definitions AttributeName=LockID,AttributeType=S --key-schema AttributeName=LockID,KeyType=HASH \
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --region us-east-1
 ```

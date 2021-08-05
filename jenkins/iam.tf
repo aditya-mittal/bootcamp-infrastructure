@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "s3_readwrite_policy_docuemnt" {
     sid       = "AllObjectActions"
     effect    = "Allow"
     actions   = ["s3:*Object"]
-    resources = ["arn:aws:s3:::ee-pune-bootcamp-2021-tf-state/*"]
+    resources = ["arn:aws:s3:::REPLACE-USERNAME-bootcamp-2021-tf-state/*"]
   }
 }
 
@@ -53,7 +53,7 @@ data "aws_iam_policy_document" "dynamo_readwrite_policy_document" {
     actions = [
       "dynamodb:*Item"
     ]
-    resources = ["arn:aws:dynamodb:us-east-1:038062473746:table/ee-pune-bootcamp-2021-terraform-lock-table"]
+    resources = ["arn:aws:dynamodb:us-east-1:038062473746:table/REPLACE-USERNAME-bootcamp-2021-tf-lock-table"]
   }
 }
 
