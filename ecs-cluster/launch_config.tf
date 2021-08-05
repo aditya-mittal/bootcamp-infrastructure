@@ -30,9 +30,10 @@ data "template_file" "ecs_userdata" {
 resource "aws_launch_configuration" "ecs_launch_config" {
   name                 = "${local.name_prefix}-ecs"
   image_id             = data.aws_ami.ecs_ami.id
-  instance_type        = "t2.medium"
+  instance_type        = "t2.micro"
   iam_instance_profile = aws_iam_instance_profile.ecs.name
   user_data            = data.template_file.ecs_userdata.rendered
+  security_groups      = [aws_security_group.cluster_sg.id]
 
   // try to define spot price
   #spot_price = "TBD"

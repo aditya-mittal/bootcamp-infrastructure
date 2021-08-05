@@ -28,9 +28,9 @@ EOF
 
 data "aws_iam_policy_document" "s3_readwrite_policy_docuemnt" {
   statement {
-    sid       = "AllObjectActions"
-    effect    = "Allow"
-    actions   = [
+    sid    = "AllObjectActions"
+    effect = "Allow"
+    actions = [
       "s3:ListBucket",
       "s3:*Object"
     ]
