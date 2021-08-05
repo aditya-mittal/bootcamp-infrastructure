@@ -7,6 +7,7 @@ Repository holding code to provision all infrastructure components needed, namel
 - ECR
 - Jenkins
 - Environment (ECS Cluster)
+- Test ECS Service (Nginx as test service)
 
 ![Infra Diagram](./jenkins.png "Infra Diagram")
  
@@ -34,3 +35,4 @@ $ aws dynamodb create-table --table-name ee-pune-bootcamp-2021-terraform-lock-ta
 - [ECR](./ecr/README.md)
 - [Jenkins](./jenkins/README.md)
 - [Environment on ECS cluster](./ecs-cluster/README.md)
+- [Test ECS service](./ecs-service/README.md)

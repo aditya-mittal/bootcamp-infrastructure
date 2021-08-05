@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket  = "ee-pune-bootcamp-2021-tf-state"
-    key     = "ecs-cluster/us-east-1/terraform.tfstate"
+    key     = "nginx-ecs-service/us-east-1/terraform.tfstate"
     encrypt = true
 
     dynamodb_table = "ee-pune-bootcamp-2021-terraform-lock-table"
@@ -17,11 +17,17 @@ provider "aws" {
 }
 
 locals {
-  aws_region   = "us-east-1"
-  name_prefix  = "bootcamp-2021-ee-pune"
-  cluster_name = "${local.name_prefix}-cluster"
-  vpc_id       = data.terraform_remote_state.vpc.outputs.vpc_id
-  alb_sg_id    = data.terraform_remote_state.alb.outputs.alb_sg_id
+  aws_region       = "us-east-1"
+  name_prefix      = "bootcamp-2021-ee-pune"
+  vpc_id           = data.terraform_remote_state.vpc.outputs.vpc_id
+  alb_arn          = data.terraform_remote_state.alb.outputs.alb_arn
+  cluster_name     = "${local.name_prefix}-cluster"
+  service_name     = "nginx"
+  container_port   = 80
+  container_image  = "nginx:latest"
+  container_cpu    = 10
+  container_memory = 512
+  desired_count    = 1
   common_tags = {
     CreatedBy             = "terraform"
     MaintainerSlackHandle = "${local.name_prefix}"
@@ -35,14 +41,6 @@ data "terraform_remote_state" "vpc" {
     bucket = "ee-pune-bootcamp-2021-tf-state"
     key    = "vpc/us-east-1/terraform.tfstate"
     region = "us-east-1"
-  }
-}
-
-data "aws_subnet_ids" "private_subnets" {
-  vpc_id = local.vpc_id
-
-  tags = {
-    Type = "private"
   }
 }
 
