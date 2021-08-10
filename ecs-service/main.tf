@@ -26,7 +26,7 @@ locals {
   container_port   = 80
   container_image  = "nginx:latest"
   container_cpu    = 10
-  container_memory = 512
+  container_memory = 50
   desired_count    = 1
   common_tags = {
     CreatedBy             = "terraform"
