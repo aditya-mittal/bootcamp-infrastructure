@@ -130,6 +130,11 @@ resource "aws_iam_role_policy_attachment" "route53_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53FullAccess"
 }
 
+resource "aws_iam_role_policy_attachment" "ecr_policy" {
+  role       = aws_iam_role.jenkins.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
+}
+
 resource "aws_iam_instance_profile" "jenkins" {
   name = aws_iam_role.jenkins.name
   role = aws_iam_role.jenkins.name
