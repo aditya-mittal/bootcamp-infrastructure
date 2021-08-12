@@ -42,4 +42,4 @@ docker run -d -p 8080:8080 \
     -v /tmp/key:/run/secrets/SSH_PRIVATE_KEY \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --name jenkins \
-    038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ee-pune-ecr/jenkins:${image_tag}
+    038062473746.dkr.ecr.us-east-1.amazonaws.com/bootcamp-2021-ecr/jenkins:${image_tag}

@@ -2,11 +2,11 @@ terraform {
   required_version = "0.12.19"
 
   backend "s3" {
-    bucket  = "ee-pune-bootcamp-2021-tf-state"
+    bucket  = "bootcamp-2021-tf-state"
     key     = "ecr/us-east-1/terraform.tfstate"
     encrypt = true
 
-    dynamodb_table = "ee-pune-bootcamp-2021-terraform-lock-table"
+    dynamodb_table = "bootcamp-2021-tf-lock-table"
     region         = "us-east-1"
   }
 }
@@ -17,7 +17,7 @@ provider "aws" {
 }
 
 locals {
-  name_prefix = "bootcamp-2021-ee-pune"
+  name_prefix = "bootcamp-2021"
   common_tags = {
     CreatedBy             = "terraform"
     MaintainerSlackHandle = "${local.name_prefix}"
