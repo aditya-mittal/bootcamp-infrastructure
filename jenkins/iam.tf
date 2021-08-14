@@ -112,7 +112,21 @@ resource "aws_iam_role_policy_attachment" "ec2_policy" {
 resource "aws_iam_role_policy_attachment" "ecs_policy" {
   role       = aws_iam_role.jenkins.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonECS_FullAccess"
+}
 
+resource "aws_iam_role_policy_attachment" "logs_policy" {
+  role       = aws_iam_role.jenkins.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "route53_policy" {
+  role       = aws_iam_role.jenkins.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonRoute53FullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "ecr_policy" {
+  role       = aws_iam_role.jenkins.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
 }
 
 resource "aws_iam_instance_profile" "jenkins" {

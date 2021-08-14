@@ -28,7 +28,7 @@ data "template_file" "ecs_userdata" {
 }
 
 resource "aws_launch_configuration" "ecs_launch_config" {
-  name                 = "${local.name_prefix}-ecs"
+  name_prefix          = "${local.name_prefix}-ecs"
   image_id             = data.aws_ami.ecs_ami.id
   instance_type        = "t2.micro"
   iam_instance_profile = aws_iam_instance_profile.ecs.name
