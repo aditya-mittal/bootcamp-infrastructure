@@ -31,11 +31,18 @@ $ aws dynamodb create-table --table-name REPLACE-USERNAME-bootcamp-2021-tf-lock-
     --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --region us-east-1
 ```
 
-### Provisioning infrastructure
+### Provisioning infrastructure (in the mentioned order)
 
 - [VPC](./vpc/README.md)
-- [DNS](./dns/README.md)
 - [ALB](./alb/README.md)
 - [ECR](./ecr/README.md)
 - [Jenkins](./jenkins/README.md)
 - [Environment on ECS cluster](./ecs-cluster/README.md)
+
+### Destroying infrastructure (in the mentioned order)
+
+- [Environment on ECS cluster](./ecs-cluster/README.md)
+- [Jenkins](./jenkins/README.md)
+- [ECR](./ecr/README.md)
+- [ALB](./alb/README.md)
+- [VPC](./vpc/README.md)
