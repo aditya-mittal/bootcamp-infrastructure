@@ -21,6 +21,27 @@ resource "aws_lb_listener" "http_listener" {
   port              = 80
   protocol          = "HTTP"
   default_action {
+    type = "redirect"
+
+    redirect {
+      status_code = "HTTP_301"
+      port        = "443"
+      protocol    = "HTTPS"
+    }
+  }
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_lb_listener" "https_listener" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = 443
+  protocol          = "HTTPS"
+
+  certificate_arn = local.ssl_cert_arn
+
+  default_action {
     type = "fixed-response"
 
     fixed_response {

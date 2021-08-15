@@ -17,9 +17,10 @@ provider "aws" {
 }
 
 locals {
-  aws_region  = "us-east-1"
-  name_prefix = "REPLACE-USERNAME-bootcamp-2021"
-  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
+  aws_region   = "us-east-1"
+  name_prefix  = "REPLACE-USERNAME-bootcamp-2021"
+  vpc_id       = data.terraform_remote_state.vpc.outputs.vpc_id
+  ssl_cert_arn = "arn:aws:acm:us-east-1:038062473746:certificate/940125ee-4c95-4634-85be-1eae53f85af6"
 
   common_tags = {
     CreatedBy             = "terraform"
