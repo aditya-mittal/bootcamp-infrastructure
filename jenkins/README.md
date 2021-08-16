@@ -19,6 +19,8 @@ $ terraform plan -out tfplan
 $ terraform apply tfplan
 ```
 
+The Jenkins must be reachable at https://REPLACE-USERNAME.jenkins.bootcamp2021.online
+
 ### Steps to de-provision
 
 ```bash
