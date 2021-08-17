@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket  = "REPLACE-USERNAME-bootcamp-2021-tf-state"
-    key     = "REPLACE-USERNAME-ecr/us-east-1/terraform.tfstate"
+    key     = "ecr/us-east-1/terraform.tfstate"
     encrypt = true
 
     dynamodb_table = "REPLACE-USERNAME-bootcamp-2021-tf-lock-table"

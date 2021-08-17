@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket  = "REPLACE-USERNAME-bootcamp-2021-tf-state"
-    key     = "REPLACE-USERNAME-jenkins/us-east-1/terraform.tfstate"
+    key     = "jenkins/us-east-1/terraform.tfstate"
     encrypt = true
 
     dynamodb_table = "REPLACE-USERNAME-bootcamp-2021-tf-lock-table"
@@ -34,7 +34,7 @@ data "terraform_remote_state" "vpc" {
 
   config = {
     bucket = "REPLACE-USERNAME-bootcamp-2021-tf-state"
-    key    = "REPLACE-USERNAME-vpc/us-east-1/terraform.tfstate"
+    key    = "vpc/us-east-1/terraform.tfstate"
     region = "us-east-1"
   }
 }
@@ -44,7 +44,7 @@ data "terraform_remote_state" "alb" {
 
   config = {
     bucket = "REPLACE-USERNAME-bootcamp-2021-tf-state"
-    key    = "REPLACE-USERNAME-alb/us-east-1/terraform.tfstate"
+    key    = "alb/us-east-1/terraform.tfstate"
     region = "us-east-1"
   }
 }

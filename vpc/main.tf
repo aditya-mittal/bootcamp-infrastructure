@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket  = "REPLACE-USERNAME-bootcamp-2021-tf-state"
-    key     = "REPLACE-USERNAME-vpc/us-east-1/terraform.tfstate"
+    key     = "vpc/us-east-1/terraform.tfstate"
     encrypt = true
 
     region         = "us-east-1"
