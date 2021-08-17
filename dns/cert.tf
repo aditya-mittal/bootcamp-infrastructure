@@ -4,8 +4,8 @@ resource "aws_acm_certificate" "ssl_cert" {
 
   subject_alternative_names = [
     "*.${local.domain_name}",
-    "*.jenkins.${local.domain_name}",
-    "*.api.${local.domain_name}"
+    "*.api.${local.domain_name}",
+    "*.jenkins.${local.domain_name}"
   ]
 
   tags = merge(
