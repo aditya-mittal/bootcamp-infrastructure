@@ -10,6 +10,7 @@ The entire provisioning of VPC is done using terraform.
 ### Pre-requisites
 
 - [terraform 0.12.19](https://learn.hashicorp.com/terraform/getting-started/install.html)
+- Please replace `FILL_ME` with correct values.
 
 ### Steps to provision
 

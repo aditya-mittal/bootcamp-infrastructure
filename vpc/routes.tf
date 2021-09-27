@@ -2,7 +2,7 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block = "0.0.0.0/0"
+    cidr_block = "FILL_ME"
     gateway_id = aws_internet_gateway.igw.id
   }
 
@@ -18,7 +18,7 @@ resource "aws_route_table" "private_us_east_1a" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block     = "0.0.0.0/0"
+    cidr_block     = "FILL_ME"
     nat_gateway_id = aws_nat_gateway.nat_gw_us_east_1a.id
   }
 
@@ -34,7 +34,7 @@ resource "aws_route_table" "private_us_east_1b" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block     = "0.0.0.0/0"
+    cidr_block     = "FILL_ME"
     nat_gateway_id = aws_nat_gateway.nat_gw_us_east_1b.id
   }
 
@@ -50,7 +50,7 @@ resource "aws_route_table" "private_us_east_1c" {
   vpc_id = aws_vpc.main.id
 
   route {
-    cidr_block     = "0.0.0.0/0"
+    cidr_block     = "FILL_ME"
     nat_gateway_id = aws_nat_gateway.nat_gw_us_east_1c.id
   }
 
