@@ -35,8 +35,6 @@ $ aws dynamodb create-table --table-name REPLACE-USERNAME-bootcamp-2021-tf-lock-
 
 - [VPC](./vpc/README.md)
 - [ALB](./alb/README.md)
-- [ECR](./ecr/README.md)
-- [Jenkins](./jenkins/README.md)
 - [Environment on ECS cluster](./ecs-cluster/README.md)
 
 ### Destroying infrastructure (in the mentioned order)

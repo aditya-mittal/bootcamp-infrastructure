@@ -59,34 +59,3 @@ resource "aws_subnet" "public_us_east_1b" {
 
   depends_on = [aws_internet_gateway.igw]
 }
-
-resource "aws_subnet" "private_us_east_1c" {
-  vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.128.0/19"
-  availability_zone = "us-east-1c"
-
-  tags = merge(
-    map(
-      "Name", "${local.name_prefix}-private-subnet-us-east-1c",
-      "Type", "private"
-    ),
-    local.common_tags
-  )
-}
-
-resource "aws_subnet" "public_us_east_1c" {
-  vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.160.0/20"
-  availability_zone       = "us-east-1c"
-  map_public_ip_on_launch = true
-
-  tags = merge(
-    map(
-      "Name", "${local.name_prefix}-public-subnet-us-east-1c",
-      "Type", "public"
-    ),
-    local.common_tags
-  )
-
-  depends_on = [aws_internet_gateway.igw]
-}

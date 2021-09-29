@@ -27,23 +27,23 @@ data "template_file" "ecs_userdata" {
   }
 }
 
-resource "aws_launch_configuration" "ecs_launch_config" {
-  name_prefix          = "${local.name_prefix}-ecs"
-  image_id             = data.aws_ami.ecs_ami.id
-  instance_type        = "t2.micro"
+
+resource "aws_instance" "cluster_instance" {
+  ami = data.aws_ami.ecs_ami.id
+  instance_type = "t2.micro"
   iam_instance_profile = aws_iam_instance_profile.ecs.name
-  user_data            = data.template_file.ecs_userdata.rendered
-  security_groups      = [aws_security_group.cluster_sg.id]
-
-  // try to define spot price
-  #spot_price = "TBD"
-
+  user_data = data.template_file.ecs_userdata.rendered
+  security_groups = [aws_security_group.cluster_sg.id]
+  subnet_id = tolist(data.aws_subnet_ids.private_subnets.ids)[0]
   root_block_device {
-    volume_size           = 30
+    volume_size = 30
     delete_on_termination = true
   }
 
   lifecycle {
     create_before_destroy = true
   }
+
+  tags = merge(map("Name", "REPLACE-USERNAME.${local.name_prefix}-ecs-cluster-instance"), local.common_tags
+  )
 }
