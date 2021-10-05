@@ -46,7 +46,7 @@ resource "aws_lb_listener" "https_listener" {
 
     fixed_response {
       content_type = "text/plain"
-      message_body = "Hello REPLACE-USERNAME, welcome to EE Bootcamp!"
+      message_body = "Hello aditya, welcome to EE Bootcamp!"
       status_code  = "200"
     }
   }

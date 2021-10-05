@@ -5,7 +5,7 @@ data "aws_route53_zone" "main" {
 
 resource "aws_route53_record" "root" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "REPLACE-USERNAME.${data.aws_route53_zone.main.name}"
+  name    = "aditya.${data.aws_route53_zone.main.name}"
   type    = "A"
 
   alias {
@@ -17,7 +17,7 @@ resource "aws_route53_record" "root" {
 
 resource "aws_route53_record" "service" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "REPLACE-USERNAME.api.${data.aws_route53_zone.main.name}"
+  name    = "aditya.api.${data.aws_route53_zone.main.name}"
   type    = "A"
 
   alias {

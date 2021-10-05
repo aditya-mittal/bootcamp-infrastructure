@@ -44,6 +44,6 @@ resource "aws_instance" "cluster_instance" {
     create_before_destroy = true
   }
 
-  tags = merge(map("Name", "REPLACE-USERNAME.${local.name_prefix}-ecs-cluster-instance"), local.common_tags
+  tags = merge(map("Name", "aditya.${local.name_prefix}-ecs-cluster-instance"), local.common_tags
   )
 }
